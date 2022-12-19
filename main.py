@@ -11,8 +11,8 @@ vendor_label = tk.Label(text="Vendor:")
 vendor_field = tk.Entry()
 product_label = tk.Label(text="Product:")
 product_field = tk.Entry()
-#version_label = tk.Label(text="Version:")
-#version_field = tk.Entry()
+version_label = tk.Label(text="Version:")
+version_field = tk.Entry()
 
 # Create the search button
 def search_cves():
@@ -22,8 +22,8 @@ def search_cves():
 
     # Send the request to the NVD
     base_url = "https://services.nvd.nist.gov/rest/json/cves/2.0?"
-    # virtual_match_string = f"cpe:2.3:a:{vendor}:{product}:v:{version}"
-    virtual_match_string = f"cpe:2.3:a:{vendor}:{product}"
+    virtual_match_string = f"cpe:2.3:a:{vendor}:{product}:v:{version}"
+    #virtual_match_string = f"cpe:2.3:a:{vendor}:{product}"
     print(virtual_match_string)
     params = {"virtualMatchString": virtual_match_string}
     response = requests.get(base_url, params=params)
@@ -71,8 +71,8 @@ vendor_label.pack()
 vendor_field.pack()
 product_label.pack()
 product_field.pack()
-#version_label.pack()
-#version_field.pack()
+version_label.pack()
+version_field.pack()
 search_button.pack()
 result_text.config(height=600, width=1600)
 result_text.pack()
