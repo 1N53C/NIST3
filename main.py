@@ -1,11 +1,10 @@
 import tkinter as tk
-import urllib.parse
 import requests
 
 # Create the main window
 window = tk.Tk()
-window.title("CVE Search")
-window.geometry("1600x1200")  # Set the window size
+window.title("NIST CVE Search")
+window.geometry("1600x1200")
 
 # Create the text fields for the vendor and product
 vendor_label = tk.Label(text="Vendor:")
@@ -75,7 +74,7 @@ product_field.pack()
 version_label.pack()
 version_field.pack()
 search_button.pack()
-result_text.config(height=600, width=1600)
+result_text.config(height=600, width=2000)
 result_text.pack()
 
 # Run the main loop
