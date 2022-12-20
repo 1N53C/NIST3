@@ -1,4 +1,5 @@
 import tkinter as tk
+import urllib.parse
 import requests
 
 # Create the main window
@@ -18,18 +19,18 @@ version_field = tk.Entry()
 def search_cves():
     vendor = vendor_field.get()
     product = product_field.get()
-    #version = version_field.get()
+    version = version_field.get()
 
     # Send the request to the NVD
-    base_url = "https://services.nvd.nist.gov/rest/json/cves/2.0?"
-    virtual_match_string = f"cpe:2.3:a:{vendor}:{product}:v:{version}"
-    #virtual_match_string = f"cpe:2.3:a:{vendor}:{product}"
-    print(virtual_match_string)
+    base_url = "https://services.nvd.nist.gov/rest/json/cves/2.0?virtualMatchString="
+
+    virtual_match_string = f"cpe:2.3:a:{vendor}:{product}&versionStart={version}&versionStartType=including&versionEnd={version}&versionEndType=excluding"
+
     params = {"virtualMatchString": virtual_match_string}
-    response = requests.get(base_url, params=params)
+    url = base_url + virtual_match_string
+    response = requests.get(url)
     if response.status_code == 200:
         cves = response.json()
-
         result_text.delete("1.0", tk.END)  # Clear the text area
         result = "Number of CVEs: " + str(cves['totalResults']) + "\n\n"
         # Format the output
